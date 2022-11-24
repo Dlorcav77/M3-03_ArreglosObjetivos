@@ -1,5 +1,6 @@
-const propiedades = document.querySelector('.propiedades');
-const btnBuscar   = document.querySelector('#buscar');
+const propiedades      = document.querySelector('.propiedades');
+const btnBuscar        = document.querySelector('#buscar');
+const btnRestablecer   = document.querySelector('#restablecer');
 const cantCuartosInput = document.querySelector('#cantCuartos');
 const desdeInput       = document.querySelector('#desde');
 const hastaInput       = document.querySelector('#hasta');
@@ -103,6 +104,28 @@ const propiedadesJSON = [
     </div>
     `; 
     } 
+  } 
+  });
+
+  btnRestablecer.addEventListener("click", (e) =>{
+    propiedades.innerHTML = ''; 
+
+  for (let dep of propiedadesJSON)
+  {
+    propiedades.innerHTML += `
+    <div class="propiedad">
+        <div class="img" style="background-image: url('${dep.src}')"></div>
+          <section>
+              <h5>${dep.name}</h5>
+              <div class="d-flex justify-content-between">
+                  <p>Cuartos: ${dep.rooms}</p>
+                  <p>Metros: ${dep.m}</p>
+              </div>
+              <p class="my-3">${dep.description}</p>
+              <button class="btn btn-info ">Ver más</button>
+          </section>
+    </div>
+    `; 
   } 
   });
 
