@@ -1,7 +1,8 @@
 const propiedades = document.querySelector('.propiedades');
-
-const form        = document.querySelector('#form');
 const btnBuscar   = document.querySelector('#buscar');
+const cantCuartosInput = document.querySelector('#cantCuartos');
+const desdeInput       = document.querySelector('#desde');
+const hastaInput       = document.querySelector('#hasta');
 
 const propiedadesJSON = [
     {
@@ -54,28 +55,37 @@ const propiedadesJSON = [
     }
   ];
 
+  for (let dep of propiedadesJSON){
+
+    propiedades.innerHTML += `
+    <div class="propiedad">
+        <div class="img" style="background-image: url('${dep.src}')"></div>
+          <section>
+              <h5>${dep.name}</h5>
+              <div class="d-flex justify-content-between">
+                  <p>Cuartos: ${dep.rooms}</p>
+                  <p>Metros: ${dep.m}</p>
+              </div>
+              <p class="my-3">${dep.description}</p>
+              <button class="btn btn-info ">Ver más</button>
+          </section>
+    </div>
+  
+    `; 
+  }
+
+
   btnBuscar.addEventListener("click", (e) =>{
-    console.log('hola entre')
+    propiedades.innerHTML = ''; 
     e.preventDefault();
-
-   
-
-    const cantCuartosInput = document.querySelector('#cantCuatos');
-    const desdeInput       = document.querySelector('#desde');
-    const hastaInput       = document.querySelector('#hasta');
 
     const cantC  = cantCuartosInput.value;
     const des    = desdeInput.value;
-    const has    = hastaInput.value; // no me funciona el value la verdad no entiendo el por que no
-                                     // me imagino que quizas me falta algun tipo de compatibilidad con js la verdad no se
-                                     // lo que sigue de ejercicio lo realice segun teoria ya que lamentablmente no me funciono ya que no me 
-                                     // me lanza un problema con los value mil disculpas, y ojala me pueda ayudar con respecto a esto       
-//    console.log(cantC)
+    const has    = hastaInput.value;
 
-   
-  for (let dep of propiedadesJSON){
-
-    if(dep.rooms <= cantC && dep.m >= desde && dep.m <= hasta)
+  for (let dep of propiedadesJSON)
+  {
+    if(dep.rooms <= cantC && dep.m >= des && dep.m <= has)
     {
     console.log(dep)
     propiedades.innerHTML += `
@@ -93,28 +103,9 @@ const propiedadesJSON = [
     </div>
     `; 
     } 
-  }
-
-    
+  } 
   });
 
 
-  for (let dep of propiedadesJSON){
 
-    propiedades.innerHTML += `
-    <div class="propiedad">
-        <div class="img" style="background-image: url('${dep.src}')"></div>
-          <section>
-              <h5>${dep.name}</h5>
-              <div class="d-flex justify-content-between">
-                  <p>Cuartos: ${dep.rooms}</p>
-                  <p>Metros: ${dep.m}</p>
-              </div>
-              <p class="my-3">${dep.description}</p>
-              <button class="btn btn-info ">Ver más</button>
-          </section>
-    </div>
-
-    `; 
-  }
   
